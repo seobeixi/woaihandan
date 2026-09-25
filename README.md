@@ -54,48 +54,58 @@ woaihandan/
 
 ---
 
-## 三、部署三步
+## 三、部署状态（2026-09-25 已完成大半）
 
-### 第 1 步：建仓库并推送
+### ✅ 第 1 步：建仓库并推送 —— 已完成
 
-```bash
-cd /h/workbuddylujing/2026-09-20-13-41-31/woaihandan
+- 仓库地址：https://github.com/seobeixi/woaihandan
+- 24 个文件已推送（22 个站点文件 + `CNAME` + `.nojekyll`）
+- 提交：`6407879 初始化：邯郸旅游攻略站（17 页 + GEO 配置）`
 
-git init
-git branch -M main
-git add .
-git commit -m "初始化：邯郸旅游攻略站"
-git remote add origin https://github.com/seobeixi/woaihandan.git
-git push -u origin main
+### ✅ 第 2 步：开启 Pages —— 已完成
+
+- Pages 已开启，分支 `main`、目录 `/ (root)`
+- 构建状态：`built`
+- 自定义域名已在 GitHub 侧设置：`woaihandan.com`
+- 已写入 `CNAME` 文件（防止推送时域名配置丢失）
+- 已加 `.nojekyll`（跳过 Jekyll 处理，避免下划线目录被吃）
+
+**当前可通过 GitHub 默认地址访问**（已验证 HTTP 200）：
+```
+http://seobeixi.github.io/woaihandan/
 ```
 
-> 先在 GitHub 网页建**空仓库**，名字 `woaihandan`。
-> ⚠️ **README / .gitignore / License 三个勾都不要勾。**
+### ⏳ 第 3 步：阿里云 DNS 解析 —— 等你操作
 
-### 第 2 步：开启 Pages
+**这是唯一需要你动手的一步**（改域名解析需要阿里云账号权限）。
 
-仓库 → `Settings` → `Pages` → 分支 `main`、目录 `/ (root)` → `Save`
+**在阿里云 DNS 添加这 5 条记录：**
 
-### 第 3 步：绑定域名
+| 类型 | 主机记录 | 记录值 | 说明 |
+|---|---|---|---|
+| A | `@` | `185.199.108.153` | 根域名，4 条都要 |
+| A | `@` | `185.199.109.153` | |
+| A | `@` | `185.199.110.153` | |
+| A | `@` | `185.199.111.153` | |
+| CNAME | `www` | `seobeixi.github.io` | 子域名 |
 
-**顺序不能反！** 先在 GitHub 填域名：
+**⚠️ 三个关键点：**
 
-仓库 → `Settings` → `Pages` → `Custom domain` 填 `woaihandan.com` → `Save`
+1. **先把 `www` 那条旧的停放记录删掉** —— 现在 `www.woaihandan.com` 指向阿里云的默认停放页 `118.123.21.137`，不删会冲突。
+2. **CNAME 值只填 `seobeixi.github.io`**，后面**不要**带 `/woaihandan` 或仓库名。
+3. **如果阿里云提示要备案** —— 走工单找客服，说明「解析到境外服务器（GitHub Pages），申请境外解析豁免」。这是注册商的内部风控，不是政策强制。
 
-然后去**阿里云 DNS** 添加：
+**操作路径**：阿里云控制台 → 域名 → `woaihandan.com` → 解析设置 → 添加记录
 
-| 类型 | 主机记录 | 记录值 |
-|---|---|---|
-| A | `@` | `185.199.108.153` |
-| A | `@` | `185.199.109.153` |
-| A | `@` | `185.199.110.153` |
-| A | `@` | `185.199.111.153` |
-| CNAME | `www` | `seobeixi.github.io` |
+**验证 DNS 是否生效**（在电脑上开 cmd 执行）：
+```
+nslookup woaihandan.com
+```
+看到返回 `185.199.108.153` 这类地址就成了（通常 10 分钟到 1 小时）。
 
-> ⚠️ CNAME 值**只填 `seobeixi.github.io`**，不要带仓库名。
-> ⚠️ 阿里云提示要备案的话，走工单申请「境外解析豁免」。
+### ⏳ 第 4 步：开启 HTTPS —— DNS 生效后我来做
 
-等 DNS 生效后勾上 `Enforce HTTPS`。
+DNS 生效后 GitHub 会自动签发证书（Let's Encrypt，免费），我会帮你勾上 `Enforce HTTPS`。
 
 ---
 
