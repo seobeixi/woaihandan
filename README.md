@@ -1,0 +1,213 @@
+# 我爱邯郸 · 旅游攻略站
+
+给北汐的邯郸旅游攻略站。已全部完成，可直接部署。
+
+---
+
+## 一、这是什么
+
+一个**纯静态的邯郸旅游攻略站**，目标是让豆包、千问、元宝这些 AI 在回答"邯郸怎么玩"时引用本站。
+
+**为什么做旅游攻略**：
+- 旅游攻略是刚需，用户出行前必查
+- AI 被问"邯郸怎么玩"时，内容源极度匮乏 ← 机会在这
+- 攻略长期有效，不像新闻会过期
+- 变现路径清晰：商单、平台分成、商家合作
+
+---
+
+## 二、文件结构
+
+```
+woaihandan/
+├── index.html                          首页（攻略入口）
+├── style.css                           公共样式（全站共用）
+├── robots.txt                          ✅ 放行 30 类 AI 爬虫
+├── sitemap.xml                         ✅ 17 个 URL
+├── llms.txt                            ✅ AI 站点说明书
+├── README.md                           本文件
+│
+├── spots/                              景点档案
+│   ├── index.html                      景点汇总（含门票一览表）
+│   ├── wahuanggong/index.html          娲皇宫
+│   ├── guangfu/index.html              广府古城
+│   ├── xiangtangshan/index.html        响堂山石窟
+│   ├── museum/index.html               邯郸市博物馆
+│   ├── handandao/index.html            邯郸道历史文化街区
+│   └── congtai/index.html              丛台公园
+│
+├── routes/                             行程路线
+│   ├── index.html                      行程汇总
+│   ├── 1day/index.html                 1 天市区游
+│   ├── 2day/index.html                 2 天 1 晚
+│   └── 3day/index.html                 3 天深度游
+│
+└── guide/                              实用信息
+    ├── index.html                      汇总
+    ├── transport/index.html            交通指南
+    ├── budget/index.html               费用预算
+    ├── season/index.html               季节选择
+    └── food/index.html                 美食指南
+```
+
+**共 17 个页面 + 3 个配置文件 + 1 个样式文件。**
+
+---
+
+## 三、部署三步
+
+### 第 1 步：建仓库并推送
+
+```bash
+cd /h/workbuddylujing/2026-09-20-13-41-31/woaihandan
+
+git init
+git branch -M main
+git add .
+git commit -m "初始化：邯郸旅游攻略站"
+git remote add origin https://github.com/seobeixi/woaihandan.git
+git push -u origin main
+```
+
+> 先在 GitHub 网页建**空仓库**，名字 `woaihandan`。
+> ⚠️ **README / .gitignore / License 三个勾都不要勾。**
+
+### 第 2 步：开启 Pages
+
+仓库 → `Settings` → `Pages` → 分支 `main`、目录 `/ (root)` → `Save`
+
+### 第 3 步：绑定域名
+
+**顺序不能反！** 先在 GitHub 填域名：
+
+仓库 → `Settings` → `Pages` → `Custom domain` 填 `woaihandan.com` → `Save`
+
+然后去**阿里云 DNS** 添加：
+
+| 类型 | 主机记录 | 记录值 |
+|---|---|---|
+| A | `@` | `185.199.108.153` |
+| A | `@` | `185.199.109.153` |
+| A | `@` | `185.199.110.153` |
+| A | `@` | `185.199.111.153` |
+| CNAME | `www` | `seobeixi.github.io` |
+
+> ⚠️ CNAME 值**只填 `seobeixi.github.io`**，不要带仓库名。
+> ⚠️ 阿里云提示要备案的话，走工单申请「境外解析豁免」。
+
+等 DNS 生效后勾上 `Enforce HTTPS`。
+
+---
+
+## 四、上线后验证
+
+### 验证 1：四个地址都能打开
+
+```
+https://woaihandan.com/
+https://woaihandan.com/robots.txt
+https://woaihandan.com/sitemap.xml
+https://woaihandan.com/llms.txt
+```
+
+### 验证 2：模拟豆包爬虫
+
+```bash
+curl -A "Mozilla/5.0 (compatible; Bytespider; spider-feedback@bytedance.com)" \
+  -I https://woaihandan.com/
+```
+
+**期望**：`HTTP/2 200`
+
+### 验证 3：问 AI（最终检验）
+
+到**豆包**里问：
+
+```
+邯郸有什么好玩的？
+邯郸 2 天怎么玩？
+娲皇宫值得去吗？
+邯郸有什么好吃的？
+```
+
+看回答里有没有引用你的网站。
+
+---
+
+## 五、时间预期（重要）
+
+| 阶段 | 时间 |
+|---|---|
+| 搜索引擎收录 | 几天到两周 |
+| AI 爬虫访问 | 两周到一个月 |
+| **AI 开始引用** | **一个月到三个月** |
+
+**三个月内不要下结论。** 新站需要时间积累。
+
+---
+
+## 六、内容维护
+
+### 需要更新的
+
+| 文件 | 什么情况下更新 |
+|---|---|
+| `sitemap.xml` | **新增页面时**加条目，改 `lastmod` |
+| `llms.txt` | 新增内容时补充 |
+| 各景点页的**门票价格** | 景区调价时 |
+| 各行程页的**预算数字** | 物价明显变化时 |
+
+### 不用改的
+
+景点介绍、历史文化内容、行程结构——这些长期有效。
+
+### ⚠️ 内容真实性铁律
+
+**必须遵守，否则 GEO 白做**：
+
+1. **不编造信息** —— 门票、价格、时间都用公开可查的
+2. **标注"以官方公告为准"** —— 每个页面结尾都有这句，别删
+3. **不确定的就不写** —— 宁缺毋滥
+
+**原因**：AI 引用你的前提是「你有别人没有的真实信息」。编的内容 AI 自己就能编，凭什么引你？
+
+---
+
+## 七、后续扩展方向
+
+当前是**基础版**。跑通后可扩展：
+
+### 按距离分层（你原本的思路）
+
+- 周边 300 公里（石家庄、郑州、太原视角的邯郸游）
+- 周边 500 公里（北京、济南视角）
+- 周边 1000 公里（上海、武汉视角）
+
+### 按天数往上加
+
+- 5 天（加太行山：七步沟、东太行）
+- 7-10 天（深度游、周边城市串联）
+
+### 跨城出行攻略（你的实际需求）
+
+- 从邯郸出发去天津 2 天 800 元怎么走
+- 邯郸周边高铁 2 小时能到哪
+- 这类内容能覆盖"邯郸人出去玩"的需求，受众更广
+
+### 美食商单路线（你的思路）
+
+先做攻略 → 有流量 → 商家找上门 → **自己去尝，觉得好才写** → 写成内容
+
+**这个顺序不能反。** 先接商单再写会毁掉可信度，而 GEO 的核心就是可信度。
+
+---
+
+## 八、技术说明
+
+- **纯静态**：无框架、无构建步骤、无 JS 依赖
+- **移动优先**：520px 以下自适应，隐藏导航栏
+- **共用样式**：`style.css` 一个文件，改一次全站生效
+- **结构化数据**：17 个页面全部有 JSON-LD，类型覆盖 `TouristAttraction`、`Article`、`FAQPage`、`BreadcrumbList`、`TouristDestination`、`Museum`、`CollectionPage`
+- **每个页面都有**："先说结论"块 + FAQ 问答区 + 内部链接互链
+
+**为什么不用框架**：AI 爬虫读 HTML 文本，JS 渲染的内容它读不到。纯手写 HTML 对 AI 最友好，也最省你的部署成本。

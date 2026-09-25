@@ -1,0 +1,111 @@
+# robots.txt - 我爱邯郸
+# 目标：成为「邯郸本地信息」的可靠内容源
+# 明确欢迎所有主流 AI 爬虫抓取
+
+# ===== 传统搜索引擎 =====
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: Sogou web spider
+Allow: /
+
+User-agent: 360Spider
+Allow: /
+
+User-agent: YisouSpider
+Allow: /
+
+# ===== OpenAI（ChatGPT） =====
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+# ===== Anthropic（Claude） =====
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+# ===== Perplexity =====
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# ===== Google AI（Gemini） =====
+User-agent: Google-Extended
+Allow: /
+
+# ===== 字节跳动（豆包 / 抖音 / 今日头条）=====
+# 本站最重要的放行对象
+User-agent: Bytespider
+Allow: /
+
+# ===== 阿里（通义千问） =====
+User-agent: AliSearchSpider
+Allow: /
+
+User-agent: Qwen-Bot
+Allow: /
+
+# ===== 腾讯（元宝） =====
+User-agent: TencentYuanbaoBot
+Allow: /
+
+# ===== 百度（文心一言） =====
+User-agent: Baiduspider-ai
+Allow: /
+
+User-agent: YiyanBot
+Allow: /
+
+# ===== 训练数据类爬虫 =====
+User-agent: CCBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+User-agent: ImagesiftBot
+Allow: /
+
+User-agent: Timpibot
+Allow: /
+
+# ===== 默认全放行 =====
+User-agent: *
+Allow: /
+
+# ===== 站点地图 =====
+Sitemap: https://woaihandan.com/sitemap.xml
+
+# ===== AI 站点说明 =====
+# https://woaihandan.com/llms.txt
