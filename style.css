@@ -111,3 +111,6 @@ li{margin-bottom:8px}
   .facts .r{grid-template-columns:80px 1fr}
   .g3{grid-template-columns:1fr}
 }
+
+/* 草稿提示条（仅草稿显示，发布时自动移除） */
+.draft-banner{background:#fff8e1;border:1px solid #f0c36d;color:#8a6d3b;padding:10px 16px;border-radius:8px;margin-bottom:20px;font-size:13.5px;text-align:center}

@@ -103,6 +103,30 @@ Allow: /
 # ===== 默认全放行 =====
 User-agent: *
 Allow: /
+Disallow: /drafts/
+
+# ===== 草稿隔离区（未审核内容，禁止一切爬虫）=====
+# 草稿放 /drafts/，审核通过后才移入正式目录
+User-agent: Googlebot
+Disallow: /drafts/
+
+User-agent: Bingbot
+Disallow: /drafts/
+
+User-agent: Baiduspider
+Disallow: /drafts/
+
+User-agent: Bytespider
+Disallow: /drafts/
+
+User-agent: GPTBot
+Disallow: /drafts/
+
+User-agent: ClaudeBot
+Disallow: /drafts/
+
+User-agent: PerplexityBot
+Disallow: /drafts/
 
 # ===== 站点地图 =====
 Sitemap: https://woaihandan.com/sitemap.xml
