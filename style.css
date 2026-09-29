@@ -56,6 +56,7 @@ p{margin-bottom:15px}
 .table .c:last-child{border-right:none}
 .g2{grid-template-columns:1fr 1.5fr}
 .g3{grid-template-columns:1fr 1fr 1fr}
+.g4{grid-template-columns:1.05fr .95fr 1.25fr 1.55fr}
 
 /* 时间轴 —— 行程用 */
 .tl{margin:20px 0}
@@ -109,7 +110,7 @@ li{margin-bottom:8px}
   h1{font-size:22px}
   .grid{grid-template-columns:1fr}
   .facts .r{grid-template-columns:80px 1fr}
-  .g3{grid-template-columns:1fr}
+  .g3,.g4{grid-template-columns:1fr}
 }
 
 /* 草稿提示条（仅草稿显示，发布时自动移除） */
